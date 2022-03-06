@@ -1,0 +1,37 @@
+import os
+import sys
+
+
+fileNames = []
+# searchstr = "sprint"
+
+
+FolderList = ["Planning", "Sprint Review", "Refinement", "Retro", "Touchbases"]
+pathBase = "/Users/0345048/Desktop/"
+
+
+def getFileNames(filePath):
+    files = os.walk(filePath)
+    # for file in files:
+    #     print(file)
+    for root, dirs, files in os.walk(filePath):
+        for file in files:
+            # print(os.path.join(root, file))
+            fileNames.append(os.path.join(root, file))
+
+def openFiles(searchstr):
+    for folder in FolderList:
+        getFileNames(pathBase + folder)
+
+    for file in fileNames:
+        with open(file) as f:
+            # print file
+            lines = f.readlines()
+            for line in lines:
+                searchstr = searchstr.lower()
+                if searchstr in line.lower():
+                    print(searchstr + " found in " + file + " at line " + str(lines.index(line) + 1))
+                    os.popen("open -a CotEditor  " + file)
+
+if __name__ == '__main__':
+    openFiles(sys.argv[1])
