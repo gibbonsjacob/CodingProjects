@@ -16,30 +16,25 @@ def happyNumber(number):
         else:
             pastNums.append(number)
             digits = [int(d) for d in str(number)]
-            # print(digits)
             total = 0
             for d in digits:
                 total += d**2
-            print(total)
             happyNumber(total)
-            return total
-    else: 
-        return False
+            return False
+    ## if we haven't returned false yet, we know the number must be 1, so we append 1 to the list of numbers and return true
+    pastNums.append(1)
+    return True
 
 
-def callhappyNumber(number):
-
-    print(number)
-    total = happyNumber(number)
-    if total == 1:
+def callhappyNumber(number):    
+    happy = happyNumber(number)
+    if pastNums[-1] == 1:
         print("\n", number, "is a happy number!")
     else:
         print("\n", number, "is not a happy number")
 
 
 
-callhappyNumber(2)
+callhappyNumber(44)
 
-# for i in range(10):
-#     lst.append(random.randrange(1, 100))
 
